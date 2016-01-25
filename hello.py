@@ -1,6 +1,5 @@
 import os
 import flask
-import sys
 from pymongo import MongoClient
 try:
   import urlparse
