@@ -20,6 +20,8 @@ env:
 
 before_install:
   - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+  - which rvm
+  - find / -name rvm -print
   - ./install.sh
 
 install:
