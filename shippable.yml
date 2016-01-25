@@ -1,4 +1,3 @@
-build_image: drydock/u12pytall:prod
 language: python
 
 python:
