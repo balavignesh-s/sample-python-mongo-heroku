@@ -1,9 +1,9 @@
 #!/bin/bash -e
 path="/usr/local/rvm/bin/rvm"
-if [ -e "$PATH" ]
+if [ -e "$HOME/.rvm/scripts/rvm" ]
 then
- `$PATH use ruby-2.0.0-p598 --default`
+ rvm use ruby-2.0.0-p598 --default
 else
-	rvm use ruby-2.0.0-p598 --default
+	`$PATH use ruby-2.0.0-p598 --default`
 fi
 
