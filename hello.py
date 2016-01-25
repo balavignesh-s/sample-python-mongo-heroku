@@ -1,7 +1,12 @@
 import os
 import flask
-import urlparse
+import sys
 from pymongo import MongoClient
+try:
+  import urlparse
+except:
+  import urllib.parse
+  urlparse = urllib.parse
 
 application = flask.Flask(__name__)
 application.debug = True

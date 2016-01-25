@@ -1,23 +1,31 @@
+build_image: drydock/u12pytall:prod
 language: python
 
 python:
+  - 2.6
   - 2.7
+  - 3.3
+  - 3.4
+  - 3.5
+  - pypy
+  - pypy3
 
 services:
    - mongodb
 
 env:
   global:
-    - APP_NAME=thawing-journey-6674
+    - APP_NAME=immense-woodland-82755
     - MONGOLAB_URI=mongodb://localhost/test
-    - secure: MRuHkLbL9HPkJPU5lzkKM1+NOq1S5RrhxEyhJkk60xxYiF7DMzydiBN8oFBjWrSmyGeGRuEC22a0I5ItobdWVszfcJCaXHwtfKzfGOUdKuyCnDgvojXhv/jrBvULyLK6zsLw3b8NMxdnwNsHqSPm19qW/EIGEl9Zv/637Igos69z9aT7+xrEG013+6HtKYb8RHm+iPSNsFoBi/RSAHYuM1eLTZWG2WAkjgzZaYmrHCgNwVmk+HOGR+TOWN7Iu5lrjyvC1XDCQrOvo1hZI30cd9OqJ5aadFm3exQpNhI4I7AgOnCbK3NoWNc/GAnqKXCvsaIQ80Jd/uLIOVyMjD6Xmg==
+    - secure: bNZMKNYWuYlNnvXSIscNilx2xt4lDH65YhnjLgxgbioRnH96IA21al+RM0AKuiRmDTq/8YmUDFAFOYje7o/89dzb0z2LHh1hkA2jbz7FnUlHLc+y2TZwrAhhA6akgcCf5Zu09TRy8BrEB83cDU+8jECYwJVOPwCsnLrad6AEfh6+lTGHXF0tT4V00DvdAgDo9AN36s2sIiWy3x/OyUaZ3inbgbb5X6yRQDtdCSXPLbVpMkMQjulsRx14ajwIX19b7BVMK4X9fhDAWN8LA6RrG3FSGI0ttllYyR+JH+8dVn1Rg00XO+B/qQsmuZReJTKBPkvlODmKf71UmI9Q/kBiSw==
 
 before_install:
   - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+  - which rvm && . $HOME/.rvm/scripts/rvm && rvm use ruby-2.0.0-p598 --default && ruby --version || /usr/local/rvm/bin/rvm useruby-2.0.0-p598 --default
 
 install:
   - pip install -r requirements.txt
-
+  - pip freeze
 before_script: 
   - mkdir -p shippable/testresults
   - mkdir -p shippable/codecoverage
@@ -30,4 +38,4 @@ script:
 after_success:
   - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
   - git remote -v | grep ^heroku || heroku git:remote --ssh-git --app $APP_NAME
-  - git push -f heroku $BRANCH:master
+  - git push -f heroku master
