@@ -10,7 +10,7 @@ then
 elif [ -e "$path" ]
 then
   echo "two"
-  . ./$path use ruby-2.0.0-p598 --default && ruby --version
+  . $path && $path use ruby-2.0.0-p598 --default && ruby --version
 #elif [ -e "$homepath" ]
 #then
 #  echo "tHree"
